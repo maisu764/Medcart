@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Checkout - Medcart</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* small checkout-specific styles */
+    .checkout-area { max-width: 980px; margin: 90px auto; padding: 20px; background:#fff; border-radius:8px; box-shadow:0 6px 20px rgba(0,0,0,0.05); }
+    .two-col { display:grid; grid-template-columns: 1fr 380px; gap:20px; align-items:start; }
+    .form-group { margin-bottom:12px; }
+    label{display:block;margin-bottom:6px;font-weight:600}
+    input[type="text"], input[type="email"], textarea, select {
+      width:100%; padding:10px;border:1px solid #ddd;border-radius:6px;
+    }
+    .summary-box { border:1px solid #e6e6e6;padding:14px;border-radius:8px;background:#fafafa; }
+    .summary-row { display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dashed #eee; }
+    .summary-row:last-child{border-bottom:none}
+    .place-order { width:100%; padding:10px 14px; background:#0066cc;color:#fff;border:0;border-radius:6px;font-weight:700; cursor:pointer }
+    .small-note { font-size:13px;color:#666;margin-top:8px }
+    @media (max-width:900px){ .two-col { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <header>
+    <div id="logo">Medcart</div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="cart.html">Cart</a></li>
+      </ul>
+    </nav>
+    <div class="action">
+      <a href="cart.html" id="cart-link">Cart (<span id="cart-count">0</span>)</a>
+    </div>
+  </header>
+
+  <main class="checkout-area">
+    <h2>Checkout</h2>
+
+    <div class="two-col">
+      <!-- LEFT: Customer & payment form -->
+      <div>
+        <h3>Billing & Shipping Details</h3>
+
+        <div class="form-group">
+          <label for="cust-name">Full Name</label>
+          <input id="cust-name" type="text" placeholder="e.g., Ali Khan" />
+        </div>
+
+        <div class="form-group">
+          <label for="cust-email">Email</label>
+          <input id="cust-email" type="email" placeholder="you@example.com" />
+        </div>
+
+        <div class="form-group">
+          <label for="cust-phone">Phone</label>
+          <input id="cust-phone" type="text" placeholder="+92 3xx xxxxxxx" />
+        </div>
+
+        <div class="form-group">
+          <label for="cust-address">Address</label>
+          <textarea id="cust-address" rows="3" placeholder="Street, house no, colony"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="cust-city">City</label>
+          <input id="cust-city" type="text" />
+        </div>
+
+        <div class="form-group">
+          <label for="cust-postal">Postal Code</label>
+          <input id="cust-postal" type="text" />
+        </div>
+
+        <h3>Delivery & Payment</h3>
+        <div class="form-group">
+          <label for="delivery-method">Delivery Method</label>
+          <select id="delivery-method">
+            <option value="standard">Standard Delivery (2-5 days)</option>
+            <option value="express">Express Delivery (1-2 days) + Rs 150</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="payment-method">Payment Method</label>
+          <select id="payment-method">
+            <option value="cod">Cash on Delivery (COD)</option>
+            <option value="card">Pay by Card (Demo)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="order-notes">Order Notes (optional)</label>
+          <textarea id="order-notes" rows="2" placeholder="Delivery instructions, etc."></textarea>
+        </div>
+
+        <div class="form-group">
+          <button id="place-order" class="place-order">Place Order</button>
+          <div class="small-note">By placing an order you agree to our <a href="#" target="_blank">Terms & Conditions</a>.</div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Order summary -->
+      <aside>
+        <div class="summary-box">
+          <h4>Order Summary</h4>
+          <div id="summary-items" style="margin-top:8px"></div>
+          <div class="summary-row" style="margin-top:12px"><strong>Subtotal</strong><strong>Rs <span id="summary-subtotal">0</span></strong></div>
+          <div class="summary-row"><span>Delivery</span><strong>Rs <span id="summary-delivery">0</span></strong></div>
+          <div class="summary-row"><strong>Total</strong><strong>Rs <span id="summary-total">0</span></strong></div>
+          <div class="small-note" style="margin-top:10px">You will receive an order confirmation via email/SMS.</div>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="social-icons">
+        <a href="#"><img src="https://img.icons8.com/fluency/28/facebook.png" alt="Facebook"></a>
+        <a href="#"><img src="https://img.icons8.com/fluency/28/instagram-new.png" alt="Instagram"></a>
+        <a href="#"><img src="https://img.icons8.com/fluency/28/twitter.png" alt="Twitter"></a>
+        <a href="#"><img src="https://img.icons8.com/fluency/28/linkedin.png" alt="LinkedIn"></a>
+        <a href="#"><img src="https://img.icons8.com/fluency/28/whatsapp.png" alt="WhatsApp"></a>
+      </div>
+      <p>© Maisu 2025. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+  <script>
+    // checkout page wiring - light layer (calls functions in script.js)
+    document.addEventListener('DOMContentLoaded', () => {
+      renderCheckoutSummary(); // from script.js - fills order summary
+      document.getElementById('delivery-method').addEventListener('change', renderCheckoutSummary);
+      document.getElementById('place-order').addEventListener('click', () => {
+        const customer = {
+          name: document.getElementById('cust-name').value.trim(),
+          email: document.getElementById('cust-email').value.trim(),
+          phone: document.getElementById('cust-phone').value.trim(),
+          address: document.getElementById('cust-address').value.trim(),
+          city: document.getElementById('cust-city').value.trim(),
+          postal: document.getElementById('cust-postal').value.trim(),
+          notes: document.getElementById('order-notes').value.trim(),
+          delivery: document.getElementById('delivery-method').value,
+          payment: document.getElementById('payment-method').value
+        };
+
+        // call shared function (in script.js)
+        const result = placeOrder(customer);
+        if (result.success) {
+          // redirect to success page with order id
+          window.location.href = `order-success.html?orderId=${result.orderId}`;
+        } else {
+          alert(result.message || 'Please complete the required fields.');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
+

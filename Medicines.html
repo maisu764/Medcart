@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Medicines</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <div id="logo">Medcart</div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="medicines.html">Medicines</a></li>
+        <li><a href="baby.html">Baby Care</a></li>
+        <li><a href="personal.html">Personal Care</a></li>
+        <li><a href="supplements.html">Supplements</a></li>
+      </ul>
+    </nav>
+
+    <div class="action">
+      <a href="cart.html" id="cart-link">Cart (<span id="cart-count">0</span>)</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="products">
+      <h2>Medicines</h2>
+      <div class="grid">
+        <!-- Each product has data-name, data-price, data-img -->
+        <div class="product-card">
+          <img src="para.jpg" alt="">
+          <h3>Paracetamol (500mg)</h3>
+          <div class="price">Rs 50</div>
+          <button class="add-to-cart" data-name="Paracetamol (500mg)" data-price="50" data-img="">Add to Cart</button>
+        </div>
+
+        <div class="product-card">
+          <img src="amox.jpg" alt="">
+          <h3>Amoxicillin (250mg)</h3>
+          <div class="price">Rs 120</div>
+          <button class="add-to-cart" data-name="Amoxicillin (250mg)" data-price="120" data-img="">Add to Cart</button>
+        </div>
+
+        <div class="product-card">
+          <img src="diclo.jpg" alt="">
+          <h3>Diclofenac (50mg)</h3>
+          <div class="price">Rs 80</div>
+          <button class="add-to-cart" data-name="Diclofenac (50mg)" data-price="80" data-img="">Add to Cart</button>
+        </div>
+      </div>
+    </section>
+  </main>
+  <script src="script.js" defer></script>
+<footer>
+  <div class="footer-content">
+    <div class="social-icons">
+      <a href="#"><img src="https://img.icons8.com/fluency/28/facebook.png" alt="Facebook"></a>
+      <a href="#"><img src="https://img.icons8.com/fluency/28/instagram-new.png" alt="Instagram"></a>
+      <a href="#"><img src="https://img.icons8.com/fluency/28/twitter.png" alt="Twitter"></a>
+      <a href="#"><img src="https://img.icons8.com/fluency/28/linkedin.png" alt="LinkedIn"></a>
+      <a href="#"><img src="https://img.icons8.com/fluency/28/whatsapp.png" alt="WhatsApp"></a>
+    </div>
+    <p>© Maisu 2025. All Rights Reserved.</p>
+  </div>
+</footer>
+
+  
+  
+</body>
+</html>
+

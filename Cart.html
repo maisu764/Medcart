@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Your Cart</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* small cart-specific adjustments */
+    .cart-area { max-width: 900px; margin: 90px auto 40px; padding: 0 20px; }
+    table.cart { width:100%; border-collapse:collapse; }
+    table.cart th, table.cart td{ padding:10px; border:1px solid #ddd; text-align:center; }
+    table.cart th{ background:#0066cc; color:#fff }
+    .prod-img { width:48px; height:48px; object-fit:cover; margin-right:8px; vertical-align:middle; }
+    .cart-actions { display:flex; gap:10px; justify-content:flex-end; margin-top:12px; }
+  </style>
+</head>
+<body>
+  <header>
+    <div id="logo">Medcart</div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+      </ul>
+    </nav>
+
+    <div class="action">
+      <a href="cart.html" id="cart-link">Cart (<span id="cart-count">0</span>)</a>
+    </div>
+  </header>
+
+  <main class="cart-area">
+    <h2>Your Cart</h2>
+
+    <table class="cart" id="cart-table">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Price (Rs)</th>
+          <th>Qty</th>
+          <th>Subtotal (Rs)</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- rendered by script.js -->
+      </tbody>
+    </table>
+
+    <div class="cart-actions">
+      <div style="margin-right:auto;">
+        <button id="clear-cart">Clear Cart</button>
+      </div>
+      <div>
+        <strong> <span id="cart-total">0</span></strong>
+        <button id="checkout" style="margin-left 10px;">Checkout</button>
+      </div>
+    </div>
+  </main>
+  <script src="script.js" defer></script>
+  
+<footer>
+  <div class="footer-content">
+    <div class="social-icons">
+      <a href="#"><img src="https://img.icons8.com/fluency/28/facebook.png" alt="Facebook"></a>
+      <a href="#"><img src="https://img.icons8.com/fluency/28/instagram-new.png" alt="Instagram"></a>
+      <a href="#"><img src="https://img.icons8.com/fluency/28/twitter.png" alt="Twitter"></a>
+      <a href="#"><img src="https://img.icons8.com/fluency/28/linkedin.png" alt="LinkedIn"></a>
+      <a href="#"><img src="https://img.icons8.com/fluency/28/whatsapp.png" alt="WhatsApp"></a>
+    </div>
+    <p>© Maisu 2025. All Rights Reserved.</p>
+  </div>
+</footer>
+  
+  
+</body>
+</html>
+

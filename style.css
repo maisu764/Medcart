@@ -1,0 +1,87 @@
+/* style.css - shared by all pages */
+*{margin:0;padding:0;box-sizing:border-box;font-family:Sans-Serif;color:#1f2937}
+body{line-height:1.6;background:#f9fafb}
+
+/* header */
+header{
+  height:64px;background:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 20px;position:fixed;top:0;left:0;right:0;z-index:1002;box-shadow:0 2px 5px rgba(0,0,0,0.1)
+}
+#logo{font-size:22px;font-weight:700;color:#0066cc}
+nav ul{list-style:none;display:flex;gap:14px}
+nav ul li a{ text-decoration:none;color:#1f2937;font-weight:500;padding:6px 10px;transition:color .3s}
+nav ul li a:hover{color:#0066cc}
+.action{display:flex;align-items:center;gap:10px}
+.action a{padding:6px 12px;border-radius:6px;background:#0066cc;color:#fff;text-decoration:none}
+
+/* main */
+main{padding:90px 20px 40px;max-width:1200px;margin:0 auto}
+.hero{background:linear-gradient(to right,#0066cc,#0099ff);color:#fff;text-align:center;padding:40px 20px;border-radius:8px;margin-bottom:30px}
+h2{font-size:1.6rem;margin-bottom:20px;color:#0066cc}
+
+/* grid/cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+.card, .product-card{background:#fff;border:1px solid #e6e6e6;border-radius:8px;padding:16px;text-align:center;box-shadow:0 2px 6px rgba(0,0,0,0.03)}
+.card img, .product-card img{max-width:96px;margin:0 auto 10px;display:block}
+.card h3, .product-card h3{color:#0066cc;margin:8px 0}
+.price{font-weight:700;margin-bottom:8px}
+.btn, button.add-to-cart{display:inline-block;padding:8px 12px;background:#0066cc;color:#fff;border-radius:6px;text-decoration:none;border:0;cursor:pointer}
+button.add-to-cart{width:100%;margin-top:6px}
+
+/* footer */
+footer{background:#1f2937;color:#fff;text-align:center;padding:18px;margin-top:40px;border-top:1px solid rgba(255,255,255,0.06)}
+
+/* responsive */
+@media (max-width:600px){
+  nav ul{display:none}
+  .action{gap:8px}
+  main{padding-top:100px}
+}
+footer {
+  background: #1f2937;      /* dark background */
+  color: #fff;              /* white text */
+  text-align: center;
+  padding: 20px;
+  margin-top: 100%;
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;   /* stack icons and text vertically */
+  align-items: center;
+  gap: 10px;                /* space between icons and text */
+}
+
+.footer-content p {
+  margin: 0;
+  font-size: 14px;
+  color: #fff;              /* ensure white */
+}
+
+.social-icons {
+  display: flex;
+  gap: 15px;
+}
+
+.social-icons img {
+  width: 28px;
+  height: 28px;
+  transition: transform 0.3s ease;
+}
+
+.social-icons img:hover {
+  transform: scale(1.2);
+}
+.cart-link {
+  color: #fff;             /* make the whole cart link white */
+  text-decoration: none;   /* optional: remove underline */
+}
+
+.cart-link #cart-count {
+  color: #fff;             /* ensure number is white too */
+  font-weight: bold;       /* optional: make it stand out */
+}
+
+#cart-count {
+  color: white !important;
+}
+

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Order Confirmation - Medcart</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .receipt { max-width:900px;margin:100px auto;padding:20px;background:#fff;border-radius:8px;box-shadow:0 6px 18px rgba(0,0,0,0.04) }
+    .receipt h2{color:#0066cc}
+    .receipt .meta{margin-bottom:12px;color:#555}
+    .items-table{width:100%;border-collapse:collapse;margin-top:12px}
+    .items-table td,.items-table th{border:1px solid #eee;padding:8px;text-align:left}
+    .items-table th{background:#f9fafb}
+  </style>
+</head>
+<body>
+  <header>
+    <div id="logo">Medcart</div>
+  </header>
+
+  <main class="receipt" id="receipt">
+    <h2>Thank you — your order is confirmed!</h2>
+    <div class="meta" id="order-meta">Loading order details…</div>
+
+    <table class="items-table" id="receipt-items">
+      <thead><tr><th>Product</th><th>Price (Rs)</th><th>Qty</th><th>Subtotal (Rs)</th></tr></thead>
+      <tbody></tbody>
+    </table>
+
+    <div style="text-align:right;margin-top:14px">
+      <div><strong>Subtotal: Rs <span id="r-subtotal">0</span></strong></div>
+      <div><strong>Delivery: Rs <span id="r-delivery">0</span></strong></div>
+      <div style="font-size:18px;margin-top:6px"><strong>Total: Rs <span id="r-total">0</span></strong></div>
+    </div>
+
+    <div style="margin-top:18px">
+      <a href="index.html" class="btn">Continue Shopping</a>
+      <a href="cart.html" class="btn" style="margin-left:8px">View Cart</a>
+    </div>
+  </main>
+
+  <script src="script.js" defer></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // read ?orderId= from URL
+      const params = new URLSearchParams(window.location.search);
+      const orderId = params.get('orderId');
+      if (!orderId) {
+        document.getElementById('order-meta').textContent = 'Invalid order.';
+        return;
+      }
+      const orders = JSON.parse(localStorage.getItem('medcart_orders') || '[]');
+      const order = orders.find(o => o.id === orderId);
+      if (!order) {
+        document.getElementById('order-meta').textContent = 'Order not found.';
+        return;
+      }
+
+      // populate
+      document.getElementById('order-meta').innerHTML = `
+        <div><strong>Order ID:</strong> ${order.id}</div>
+        <div><strong>Name:</strong> ${order.customer.name}</div>
+        <div><strong>Phone:</strong> ${order.customer.phone}</div>
+        <div><strong>Payment:</strong> ${order.customer.payment.toUpperCase()}</div>
+        <div><strong>Status:</strong> ${order.status}</div>
+      `;
+
+      const tbody = document.querySelector('#receipt-items tbody');
+      let subtotal = 0;
+      order.items.forEach(it => {
+        const row = document.createElement('tr');
+        const s = it.price * it.qty;
+        subtotal += s;
+        row.innerHTML = `<td>${it.name}</td><td>Rs ${it.price}</td><td>${it.qty}</td><td>Rs ${s}</td>`;
+        tbody.appendChild(row);
+      });
+
+      document.getElementById('r-subtotal').textContent = subtotal;
+      document.getElementById('r-delivery').textContent = order.deliveryFee || 0;
+      document.getElementById('r-total').textContent = (subtotal + (order.deliveryFee || 0));
+    });
+  </script>
+
+  <footer>
+    <div class="footer-content">
+      <div class="social-icons">
+        <a href="#"><img src="https://img.icons8.com/fluency/28/facebook.png" alt="Facebook"></a>
+        <a href="#"><img src="https://img.icons8.com/fluency/28/instagram-new.png" alt="Instagram"></a>
+        <a href="#"><img src="https://img.icons8.com/fluency/28/twitter.png" alt="Twitter"></a>
+        <a href="#"><img src="https://img.icons8.com/fluency/28/linkedin.png" alt="LinkedIn"></a>
+        <a href="#"><img src="https://img.icons8.com/fluency/28/whatsapp.png" alt="WhatsApp"></a>
+      </div>
+      <p>© Maisu 2025. All Rights Reserved.</p>
+    </div>
+  </footer>
+  
+  
+  
+</body>
+</html>
+
